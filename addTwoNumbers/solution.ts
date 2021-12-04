@@ -1,13 +1,4 @@
-class ListNode {
-    val: number
-    next: ListNode | null
-
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.next = (next === undefined ? null : next)
-    }
-}
-
+import {ListNode} from "./ListNode";
 
 export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
     const result = new ListNode();
@@ -32,23 +23,4 @@ export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNod
     }
 
     return result.next;
-};
-
-function addTwoLinkLists(l1: ListNode | null, l2: ListNode | null, carry:number = 0): ListNode | null {
-    if(l1 === null && l2===null) {
-        if(carry >0){
-            return new ListNode(1);
-        }
-        return null
-    }
-    else if(l1===null && carry === 0) return l2;
-    else if(l2===null && carry === 0) return l1;
-
-    let newVal = (l1 ? l1.val:0) + (l2?l2.val:0) + carry;
-
-    return new ListNode(newVal % 10, addTwoLinkLists(l1 ? l1.next:null, l2 ? l2.next: null, newVal > 9 ? 1: 0));
-}
-
-function addTwoNumbersSlow(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    return addTwoLinkLists(l1, l2);
 };
